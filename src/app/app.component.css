@@ -11,16 +11,20 @@ mat-paginator {
   margin-right: 700px;
 }
 
-.mat-cell {
+.mat-mdc-cell {
   padding-left: 12px;
   padding-right: 12px;
-  border-left: 1px solid #eee;
+  border-left: 1px solid black;
 }
 
-.mat-header {
+.mat-mdc-header-cell  {
   padding-left: 12px;
   padding-right: 12px;
-  border-left: 1px solid #eee;
+  border-left: 1px solid black;
+}
+
+.mat-mdc-table{
+  border: 1px solid black;
 }
 
 .mat-mdc-header-row {
@@ -28,9 +32,9 @@ mat-paginator {
 }
 
 .mat-mdc-row:nth-child(even){
-  background-color:aquamarine
+  background-color:aquamarine;
 }
 
 .mat-mdc-row:nth-child(odd){
-  background-color:aliceblue
+  background-color:aliceblue;
 }
