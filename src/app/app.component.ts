@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
       }
     }
   }
-
+  selectedRow;
 }
 
 export interface PeriodicElement {

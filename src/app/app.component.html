@@ -61,7 +61,9 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;"
+    (click)="selectedRow = selectedRow === row ? null : row"
+    [ngClass]="{ 'selected': row === selectedRow }"></tr>
   </table>
   <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20]"> </mat-paginator>
 

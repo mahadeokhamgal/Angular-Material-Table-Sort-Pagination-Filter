@@ -38,3 +38,7 @@ mat-paginator {
 .mat-mdc-row:nth-child(odd){
   background-color:aliceblue;
 }
+
+.selected {
+  background-color: rgb(14, 92, 41)!important;
+}
