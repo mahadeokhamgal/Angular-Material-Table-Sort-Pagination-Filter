@@ -17,6 +17,7 @@ export class Mat3Component implements OnInit {
   public name = '';
   public symbol = '';
   public nameFilterType = 'includes';
+  public symbolFilterType = 'includes';
   displayedColumns: string[] = [
     'select',
     'position',
@@ -109,12 +110,17 @@ export class Mat3Component implements OnInit {
         case "ends": customFilterName = columnName.toLowerCase().endsWith(name);
         break;
       }
-
-      columnName.toLowerCase().includes(name);
-      const customFilterSymbol = columnSymbol.toLowerCase().includes(symbol);
+      var customFilterSymbol;
+      switch (this.symbolFilterType) {
+        case "includes": customFilterSymbol = columnSymbol.toLowerCase().includes(symbol);
+        break;
+        case "starts": customFilterSymbol = columnSymbol.toLowerCase().startsWith(symbol);
+        break;
+        case "ends": customFilterSymbol = columnSymbol.toLowerCase().endsWith(symbol);
+        break;
+      }
 
       // push boolean values into array
-      // matchFilter.push(customFilterDD);
       matchFilter.push(customFilterName);
       matchFilter.push(customFilterSymbol);
 
@@ -136,10 +142,13 @@ export class Mat3Component implements OnInit {
     const filterValue = this.name + '$' + this.symbol;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  applyNameType(type) {
+  applyType(col, type) {
     console.log("the type passed was", type);
-    this.nameFilterType = type;
-
+    switch(col) {
+      case "name" : this.nameFilterType = type;
+      break;
+      case "symbol" : this.symbolFilterType = type;
+    }
   }
   selectedRow;
 }
