@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ResizeEvent } from 'angular-resizable-element';
-import { FormGroup , FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-mat3',
@@ -16,6 +16,7 @@ export class Mat3Component implements OnInit {
   // public departureDate = '';
   public name = '';
   public symbol = '';
+  public nameFilterType = 'includes';
   displayedColumns: string[] = [
     'select',
     'position',
@@ -24,12 +25,14 @@ export class Mat3Component implements OnInit {
     'symbol',
     'action',
   ];
+  types: string[] = ["includes", "starts", "ends"];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
   // constructor()
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
@@ -80,7 +83,7 @@ export class Mat3Component implements OnInit {
   getFilterPredicate() {
     return (row: PeriodicElement, filters: string) => {
       console.log("the row is", row);
-      
+
       // split string per '$' to array
       const filterArray = filters.split('$');
       const name = filterArray[0];
@@ -96,7 +99,18 @@ export class Mat3Component implements OnInit {
 
       // verify fetching data by our searching values
       // const customFilterDD = columnDepartureDate.toDateString().toLowerCase().includes(departureDate);
-      const customFilterName = columnName.toLowerCase().includes(name);
+      // const customFilterName = columnName.toLowerCase().includes(name);
+      var customFilterName;
+      switch (this.nameFilterType) {
+        case "includes": customFilterName = columnName.toLowerCase().includes(name);
+        break;
+        case "starts": customFilterName = columnName.toLowerCase().startsWith(name);
+        break;
+        case "ends": customFilterName = columnName.toLowerCase().endsWith(name);
+        break;
+      }
+
+      columnName.toLowerCase().includes(name);
       const customFilterSymbol = columnSymbol.toLowerCase().includes(symbol);
 
       // push boolean values into array
@@ -121,6 +135,11 @@ export class Mat3Component implements OnInit {
     // // create string of our searching values and split if by '$'
     const filterValue = this.name + '$' + this.symbol;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  applyNameType(type) {
+    console.log("the type passed was", type);
+    this.nameFilterType = type;
+
   }
   selectedRow;
 }
