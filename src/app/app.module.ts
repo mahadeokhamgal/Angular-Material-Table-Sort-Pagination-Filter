@@ -1,16 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material/table';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {ResizableModule} from 'angular-resizable-element';
-import { MatRippleModule } from '@angular/material/core';
+
+import { MaterialModule } from './material.module';
+import { Mat1Module } from './mat1/mat1.module';
+import { Mat2Module } from './mat2/mat2.module';
 
 @NgModule({
   declarations: [
@@ -19,15 +14,10 @@ import { MatRippleModule } from '@angular/material/core';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ResizableModule,
-    MatRippleModule
+    
+    MaterialModule,
+    Mat1Module,
+    Mat2Module,
   ],
   providers: [],
   bootstrap: [AppComponent]
