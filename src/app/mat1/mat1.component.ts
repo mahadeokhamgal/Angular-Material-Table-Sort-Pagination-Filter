@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ResizeEvent } from 'angular-resizable-element';
+import { FormGroup , FormControl, Validators} from '@angular/forms';
+import { Voyage } from '../shared/entities.service';
 
 @Component({
   selector: 'app-mat1',
@@ -11,6 +13,10 @@ import { ResizeEvent } from 'angular-resizable-element';
   styleUrls: ['./mat1.component.css']
 })
 export class Mat1Component implements OnInit {
+  public searchForm: FormGroup;
+  // public departureDate = '';
+  public name = '';
+  public symbol = '';
   displayedColumns: string[] = [
     'select',
     'position',
@@ -22,12 +28,18 @@ export class Mat1Component implements OnInit {
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
+  // constructor()
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+    this.searchFormInit();
+    /* Filter predicate used for filtering table per different columns
+    *  */
+    this.dataSource.filterPredicate = this.getFilterPredicate();
   }
 
   isAllSelected() {
@@ -36,10 +48,10 @@ export class Mat1Component implements OnInit {
     return numSelected === numRows;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
@@ -59,6 +71,57 @@ export class Mat1Component implements OnInit {
         currentEl.style.width = cssValue;
       }
     }
+  }
+  searchFormInit() {
+    this.searchForm = new FormGroup({
+      name: new FormControl('', Validators.pattern('^[a-zA-Z ]+$')),
+      symbol: new FormControl('', Validators.pattern('^[a-zA-Z ]+$')),
+    });
+  }
+  getFilterPredicate() {
+    return (row: PeriodicElement, filters: string) => {
+      console.log("the row is", row);
+      
+      // split string per '$' to array
+      const filterArray = filters.split('$');
+      const name = filterArray[0];
+      const symbol = filterArray[1];
+      // const arrivalStation = filterArray[2];
+
+      const matchFilter = [];
+
+      // Fetch data from row
+      const columnName = row.name;
+      const columnSymbol = row.symbol;
+      // const columnArrivalStation = row.route.arrivalStation.name;
+
+      // verify fetching data by our searching values
+      // const customFilterDD = columnDepartureDate.toDateString().toLowerCase().includes(departureDate);
+      const customFilterName = columnName.toLowerCase().includes(name);
+      const customFilterSymbol = columnSymbol.toLowerCase().includes(symbol);
+
+      // push boolean values into array
+      // matchFilter.push(customFilterDD);
+      matchFilter.push(customFilterName);
+      matchFilter.push(customFilterSymbol);
+
+      // return true if all values in array is true
+      // else return false
+      return matchFilter.every(Boolean);
+    };
+  }
+  applyFilter() {
+    const ds = this.searchForm.get('name').value;
+    const as = this.searchForm.get('symbol').value;
+    // const ds = this.searchForm.get('departureStation').value;
+
+    // this.departureDate = (date === null || date === '') ? '' : date.toDateString();
+    this.name = ds === null ? '' : ds;
+    this.symbol = as === null ? '' : as;
+
+    // // create string of our searching values and split if by '$'
+    const filterValue = this.name + '$' + this.symbol;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   selectedRow;
 }

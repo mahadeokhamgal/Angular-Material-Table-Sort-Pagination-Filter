@@ -47,6 +47,8 @@ export class Mat2Component implements OnInit {
   /* this method well be called for each row in table  */
   getFilterPredicate() {
     return (row: Voyage, filters: string) => {
+      console.log("the row is", row);
+      
       // split string per '$' to array
       const filterArray = filters.split('$');
       const departureDate = filterArray[0];

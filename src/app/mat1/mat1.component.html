@@ -2,9 +2,41 @@
   <h1>Table with ang-mat filter+sort</h1>
 </div>
 <div class="mat-elevation-z8">
-  <mat-form-field>
+  <!-- <mat-form-field>
     <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
-  </mat-form-field>
+  </mat-form-field> -->
+  <form [formGroup]="searchForm" class="search__form">
+
+    <mat-form-field class="search__form_field" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input type="text"
+             aria-label="Departure station"
+             matInput
+             formControlName="name"
+             (keyup)="applyFilter()"
+      >
+    </mat-form-field>
+
+    <mat-form-field class="search__form_field" appearance="outline">
+      <mat-label>Symbol</mat-label>
+      <input type="text"
+             aria-label="Arrival station"
+             matInput
+             formControlName="symbol"
+             (keyup)="applyFilter()"
+      >
+    </mat-form-field>
+
+    <!-- <mat-form-field class="search__form_field" appearance="outline">
+      <mat-label>Choose a date</mat-label>
+      <input matInput
+             formControlName="departureDate"
+             [matDatepicker]="picker"
+             (dateInput)="applyFilter()">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field> -->
+  </form>
 
   <table mat-table [dataSource]="dataSource" matSort>
 
