@@ -7,11 +7,11 @@ import { ResizeEvent } from 'angular-resizable-element';
 import { FormGroup , FormControl, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-mat1',
-  templateUrl: './mat1.component.html',
-  styleUrls: ['./mat1.component.css']
+  selector: 'app-mat3',
+  templateUrl: './mat3.component.html',
+  styleUrls: ['./mat3.component.css']
 })
-export class Mat1Component implements OnInit {
+export class Mat3Component implements OnInit {
   public searchForm: FormGroup;
   // public departureDate = '';
   public name = '';

@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { Mat1Module } from './mat1/mat1.module';
 import { Mat2Module } from './mat2/mat2.module';
+import { Mat3Module } from './mat3/mat3.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { Mat2Module } from './mat2/mat2.module';
     MaterialModule,
     Mat1Module,
     Mat2Module,
+    Mat3Module,
   ],
   providers: [],
   bootstrap: [AppComponent]
