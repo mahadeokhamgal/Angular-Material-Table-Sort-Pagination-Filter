@@ -14,10 +14,17 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class Mat4Component implements OnInit {
   public searchForm: FormGroup;
   displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol', 'action'];
-  filterTypes: object = {"position" : ["greater", "lesser"], "name" : ["includes", "starts", "ends", "does not contain", ""], "symbol":["includes", "starts", "ends", ""]};
+  filterTypes: object = 
+  {
+    "position" : ["greater", "lesser"],
+    "name" : ["includes", "starts", "ends", "does not contain", ""],
+    "weight":["greater", "lesser"],
+    "symbol":["includes", "starts", "ends", ""]
+  };
 
   public nameFilterType = this.filterTypes["name"][0];
   public symbolFilterType = this.filterTypes["symbol"][0];
+  public weightFilterType = this.filterTypes["weight"][0];
   public positionFilterType = this.filterTypes["position"][0];
   
   
@@ -62,6 +69,7 @@ export class Mat4Component implements OnInit {
     this.searchForm = new FormGroup({
       position: new FormControl(0),
       name: new FormControl('', Validators.pattern('^[a-zA-Z ]+$')),
+      weight: new FormControl(0),
       symbol: new FormControl('', Validators.pattern('^[a-zA-Z ]+$')),
     });
   }
@@ -73,9 +81,9 @@ export class Mat4Component implements OnInit {
       case "includes":  return colVal.toLowerCase().includes(inVal);
       case "starts": return colVal.toLowerCase().startsWith(inVal);
       case "ends": return colVal.toLowerCase().endsWith(inVal);
-      case "does not contain": return inVal == "" ? true : !colVal.toLowerCase().includes(inVal);
-      case "greater": return parseInt(colVal) > parseInt(inVal);
-      case "lesser": return parseInt(colVal) < parseInt(inVal);
+      case "does not contain": return !colVal.toLowerCase().includes(inVal);
+      case "greater": return parseFloat(colVal) > parseFloat(inVal);
+      case "lesser": return parseFloat(colVal) < parseFloat(inVal);
     }
     return true;
   }
@@ -85,27 +93,36 @@ export class Mat4Component implements OnInit {
       
       return this.getTypeVal(row.position, filterArray[0], this.positionFilterType)
         && this.getTypeVal(row.name, filterArray[1], this.nameFilterType)
-        && this.getTypeVal(row.symbol, filterArray[2], this.symbolFilterType);
+        && this.getTypeVal(row.weight, filterArray[2], this.weightFilterType)
+        && this.getTypeVal(row.symbol, filterArray[3], this.symbolFilterType);
     };
   }
   applyFilter() {
     var position = this.searchForm.get('position').value;
     var name = this.searchForm.get('name').value;
+    var weight = this.searchForm.get('weight').value;
     var symbol = this.searchForm.get('symbol').value;
     
-    position === null ? '' : position;
-    name === null ? '' : name;
-    symbol === null ? '' : symbol;
+    position = position === null ? '' : position;
+    name = name === null ? '' : name;
+    weight = weight === null ? '' : weight;
+    symbol = symbol === null ? '' : symbol;
 
-    this.dataSource.filter = (position + "$" + name + '$' + symbol).trim().toLowerCase();
+    this.dataSource.filter = (position + "$" + name + '$' + weight + "$" + symbol).trim().toLowerCase();
   }
   applyType(col, type) {
     switch(col) {
       case "name" : this.nameFilterType = type;
+      this.applyFilter();
       break;
       case "symbol" : this.symbolFilterType = type;
+      this.applyFilter();
+      break;
+      case "weight" : this.weightFilterType = type;
+      this.applyFilter();
       break;
       case "position" : this.positionFilterType = type;
+      this.applyFilter();
     }
   }
   selectedRow;
