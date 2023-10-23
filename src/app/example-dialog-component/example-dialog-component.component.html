@@ -1,0 +1,12 @@
+<p>example-dialog-component works!</p>
+<h1 mat-dialog-title>Welcome user</h1> 
+<div mat-dialog-content> 
+  <p>What's your favorite animal?</p> 
+  <mat-form-field> 
+    <input matInput [(ngModel)]="data.animal"> 
+  </mat-form-field> 
+</div> 
+<div mat-dialog-actions> 
+  <button mat-button (click)="onCancel()">No thanks</button> 
+  <button class="btn btn-outline-danger" (click)="onSubmit()" mat-button mat-dialog-close>ohk</button>
+</div>

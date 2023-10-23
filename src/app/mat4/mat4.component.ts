@@ -1,17 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ResizeEvent } from 'angular-resizable-element';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, Inject, ViewChild, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ExampleDialogComponentComponent } from '../example-dialog-component/example-dialog-component.component';
+
 
 @Component({
   selector: 'app-mat4',
   templateUrl: './mat4.component.html',
   styleUrls: ['./mat4.component.css']
 })
-export class Mat4Component implements OnInit {
+export class Mat4Component implements OnInit{
   public searchForm: FormGroup;
   displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol', 'action'];
   filterTypes: object = 
@@ -30,11 +34,16 @@ export class Mat4Component implements OnInit {
   
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
+  @ViewChild('icon') iconElement: ElementRef;
+
+  animal: string;
+  name: string;
+
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-
+  constructor(public dialog: MatDialog, private renderer: Renderer2) { }
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -52,6 +61,34 @@ export class Mat4Component implements OnInit {
       ? this.selection.clear()
       : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
+  
+  openDialog({ pageX, pageY, currentTarget }: MouseEvent): void {
+    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
+    console.log((currentTarget as HTMLElement).getBoundingClientRect());
+    const dialogRef = this.dialog.open(ExampleDialogComponentComponent, {
+      width: '250px',
+      data: { name: this.name, animal: this.animal },
+      // hasBackdrop: false,
+      position: {
+        // left: `${pageX}px`, top: `${pageY}px`
+        left: `${left + width / 2}px`, top: `${top + height}px`
+      }
+    }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
+    });
+
+    console.log(this.iconElement);
+    // console.log(this.matIcon);
+    // this.matIcon.color = 'accent';
+    this.renderer.addClass(this.iconElement.nativeElement, 'icon-remove');
+  }
+
+
 
   onResizeEnd(event: ResizeEvent, columnName): void {
     if (event.edges.right) {
@@ -75,6 +112,8 @@ export class Mat4Component implements OnInit {
   }
   getTypeVal(colVal, inVal, filterType): boolean {
     console.log("gettype val", colVal, inVal, filterType);
+    if(inVal===""|| inVal===0 || inVal===null)
+      return true;
     
     switch (filterType) {
       case "": return true;

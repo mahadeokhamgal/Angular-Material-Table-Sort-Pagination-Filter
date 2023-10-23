@@ -23,10 +23,14 @@
 
             <!-- Position Column -->
             <ng-container matColumnDef="position">
+                
                 <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
                     (resizeEnd)="onResizeEnd($event, 'position')"
-                    [resizeEdges]="{bottom: false, right: true, top: false, left: true}"> No 
+                    [resizeEdges]="{bottom: false, right: true, top: false, left: true}">No  <span #icon>
+                        <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button (click)="openDialog($event)"><mat-icon  color="accent" class="icon">info_outline</mat-icon></button>
+                    </span>
                     <mat-form-field class="search__form_field" appearance="outline">
+
                         <input type="number" aria-label="symbol" matInput formControlName="position"
                             (keyup)="applyFilter()">
                         <mat-select placeholder="position">
@@ -43,7 +47,9 @@
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
                     (resizeEnd)="onResizeEnd($event, 'name')"
-                    [resizeEdges]="{bottom: false, right: true, top: false, left: true}"> Name
+                    [resizeEdges]="{bottom: false, right: true, top: false, left: true}"><span #icon>
+                        <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button (click)="openDialog($event)"><mat-icon  color="accent" class="icon">info_outline</mat-icon></button>
+                    </span> Name
                     <mat-form-field class="search__form_field" appearance="outline">
                         <input type="text" aria-label="Name" matInput formControlName="name" (keyup)="applyFilter()">
                         <mat-select placeholder="Type">
@@ -60,7 +66,9 @@
             <ng-container matColumnDef="weight">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
                     (resizeEnd)="onResizeEnd($event, 'weight')"
-                    [resizeEdges]="{bottom: false, right: true, top: false, left: true}"> Weight
+                    [resizeEdges]="{bottom: false, right: true, top: false, left: true}"><span #icon>
+                        <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button (click)="openDialog($event)"><mat-icon  color="accent" class="icon">info_outline</mat-icon></button>
+                    </span> Weight
                     <mat-form-field class="search__form_field" appearance="outline">
                         <input type="weight" aria-label="symbol" matInput formControlName="weight"
                             (keyup)="applyFilter()">
@@ -109,5 +117,3 @@
     </form>
 
     <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20]"> </mat-paginator>
-
-</div>

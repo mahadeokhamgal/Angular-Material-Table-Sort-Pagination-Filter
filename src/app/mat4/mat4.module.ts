@@ -4,6 +4,8 @@ import { Mat4Component } from './mat4.component';
 import {MaterialModule} from '../material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatIconModule
+    
   ]
 })
 export class Mat4Module {

@@ -120,5 +120,8 @@
         }
       }
     }},
-  "defaultProject": "mattable"
+  "defaultProject": "mattable",
+  "cli": {
+    "analytics": false
+  }
 }

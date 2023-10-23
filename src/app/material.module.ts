@@ -13,7 +13,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatCommonModule, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
@@ -21,6 +21,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ResizableModule } from 'angular-resizable-element';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -49,10 +52,14 @@ import { ResizableModule } from 'angular-resizable-element';
     MatSortModule,
     MatInputModule,
     MatAutocompleteModule,
-
     MatCheckboxModule,
     ResizableModule,
     MatRippleModule,
+    MatButtonModule, 
+    MatCommonModule, 
+    MatDialogModule, 
+    FormsModule
+ 
 ],
   exports: [
     MatSidenavModule,
