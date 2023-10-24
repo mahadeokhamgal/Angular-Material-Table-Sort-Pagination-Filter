@@ -5,9 +5,10 @@ import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ResizeEvent } from 'angular-resizable-element';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, Inject, ViewChild, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { Component, Inject, ViewChild, ElementRef, Renderer2, OnInit,TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExampleDialogComponentComponent } from '../example-dialog-component/example-dialog-component.component';
+
 
 
 @Component({
@@ -25,7 +26,7 @@ export class Mat4Component implements OnInit{
     "weight":["greater", "lesser"],
     "symbol":["includes", "starts", "ends", ""]
   };
-
+  public iconVal:boolean=false;
   public nameFilterType = this.filterTypes["name"][0];
   public symbolFilterType = this.filterTypes["symbol"][0];
   public weightFilterType = this.filterTypes["weight"][0];
@@ -38,8 +39,12 @@ export class Mat4Component implements OnInit{
 
   animal: string;
   name: string;
-
-
+ 
+  @ViewChild('callAPIDialog1') callAPIDialog1: TemplateRef<any>;
+  @ViewChild('callAPIDialog2') callAPIDialog2: TemplateRef<any>;
+ 
+  @ViewChild('callAPIDialog3') callAPIDialog3: TemplateRef<any>;
+  @ViewChild('callAPIDialog4') callAPIDialog4: TemplateRef<any>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -47,11 +52,105 @@ export class Mat4Component implements OnInit{
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-
     this.searchFormInit();
     this.dataSource.filterPredicate = this.getFilterPredicate();
-  }
 
+   
+  }
+  changeIconVal(){
+    this.iconVal=true;
+    console.log(this.iconVal);
+  }
+  callAPI1({ pageX, pageY, currentTarget }: MouseEvent):void {
+    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
+    console.log((currentTarget as HTMLElement).getBoundingClientRect());
+    const dialogRef = this.dialog.open(this.callAPIDialog1,{
+      
+        width: '350px',
+        height:'200px',
+        data: { name: this.name},
+        // hasBackdrop: false,
+        position: {
+          // left: `${pageX}px`, top: `${pageY}px`
+          left: `${left + width / 2}px`, top: `${top + height}px`
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+   
+      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
+    });
+  }
+  callAPI2({ pageX, pageY, currentTarget }: MouseEvent):void {
+    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
+    console.log((currentTarget as HTMLElement).getBoundingClientRect());
+    const dialogRef = this.dialog.open(this.callAPIDialog2,{
+      
+        width: '350px',
+        height:'200px',
+        data: { name: this.name},
+        // hasBackdrop: false,
+        position: {
+          // left: `${pageX}px`, top: `${pageY}px`
+          left: `${left + width / 2}px`, top: `${top + height}px`
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+   
+      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
+    });
+  }
+  callAPI3({ pageX, pageY, currentTarget }: MouseEvent):void {
+    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
+    console.log((currentTarget as HTMLElement).getBoundingClientRect());
+    const dialogRef = this.dialog.open(this.callAPIDialog3,{
+      
+        width: '350px',
+        height:'200px',
+        data: { name: this.name},
+        // hasBackdrop: false,
+        position: {
+          // left: `${pageX}px`, top: `${pageY}px`
+          left: `${left + width / 2}px`, top: `${top + height}px`
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+   
+      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
+    });
+  }
+  callAPI4({ pageX, pageY, currentTarget }: MouseEvent):void {
+    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
+    console.log((currentTarget as HTMLElement).getBoundingClientRect());
+    const dialogRef = this.dialog.open(this.callAPIDialog4,{
+      
+        width: '350px',
+        height:'200px',
+        data: { name: this.name},
+        // hasBackdrop: false,
+        position: {
+          // left: `${pageX}px`, top: `${pageY}px`
+          left: `${left + width / 2}px`, top: `${top + height}px`
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+   
+      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
+    });
+  }
+  onFilter():void{
+
+  }
+  onCancel(): void { 
+    this.dialog.closeAll(); 
+  } 
   isAllSelected() {
     return this.selection.selected.length === this.dataSource.data.length;
   }
@@ -62,31 +161,31 @@ export class Mat4Component implements OnInit{
       : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
   
-  openDialog({ pageX, pageY, currentTarget }: MouseEvent): void {
-    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
-    console.log((currentTarget as HTMLElement).getBoundingClientRect());
-    const dialogRef = this.dialog.open(ExampleDialogComponentComponent, {
-      width: '250px',
-      data: { name: this.name, animal: this.animal },
-      // hasBackdrop: false,
-      position: {
-        // left: `${pageX}px`, top: `${pageY}px`
-        left: `${left + width / 2}px`, top: `${top + height}px`
-      }
-    }
-    );
+  // openDialog({ pageX, pageY, currentTarget }: MouseEvent): void {
+  
+  //   console.log((currentTarget as HTMLElement).getBoundingClientRect());
+  //   const dialogRef = this.dialog.open(ExampleDialogComponentComponent, {
+  //     width: '350px',
+  //     data: { name: this.name, positionFilterType: this.positionFilterType },
+  //     // hasBackdrop: false,
+  //     position: {
+  //       // left: `${pageX}px`, top: `${pageY}px`
+  //       left: `${left + width / 2}px`, top: `${top + height}px`
+  //     }
+  //   }
+  //   );
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
-    });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+   
+  //     this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
+  //   });
 
-    console.log(this.iconElement);
-    // console.log(this.matIcon);
-    // this.matIcon.color = 'accent';
-    this.renderer.addClass(this.iconElement.nativeElement, 'icon-remove');
-  }
+  //   console.log(this.iconElement);
+  //   // console.log(this.matIcon);
+  //   // this.matIcon.color = 'accent';
+  //   this.renderer.addClass(this.iconElement.nativeElement, 'icon-remove');
+  // }
 
 
 
@@ -149,21 +248,7 @@ export class Mat4Component implements OnInit{
 
     this.dataSource.filter = (position + "$" + name + '$' + weight + "$" + symbol).trim().toLowerCase();
   }
-  applyType(col, type) {
-    switch(col) {
-      case "name" : this.nameFilterType = type;
-      this.applyFilter();
-      break;
-      case "symbol" : this.symbolFilterType = type;
-      this.applyFilter();
-      break;
-      case "weight" : this.weightFilterType = type;
-      this.applyFilter();
-      break;
-      case "position" : this.positionFilterType = type;
-      this.applyFilter();
-    }
-  }
+
   selectedRow;
 }
 

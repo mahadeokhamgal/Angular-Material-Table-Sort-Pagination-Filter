@@ -17,4 +17,5 @@ export class ExampleDialogComponentComponent {
     this.dialogRef.closeAll();
    
 }
+  
 }
