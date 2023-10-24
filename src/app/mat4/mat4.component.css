@@ -33,6 +33,7 @@
   mat-form-field.mat-form-field {
   width: 30%;
   margin-left: 400px;
+
   }
   
   mat-paginator {
@@ -72,4 +73,9 @@
   }
   /* .mat-dialog-content {
     padding: 10px !important;
-} */
+}
+mdc-dialog__surface{  */
+  mat-form-field{
+    margin: 20px;
+  }
+

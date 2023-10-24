@@ -67,7 +67,7 @@ export class Mat4Component implements OnInit{
     const dialogRef = this.dialog.open(this.callAPIDialog1,{
       
         width: '350px',
-        height:'200px',
+        height:'300px',
         data: { name: this.name},
         // hasBackdrop: false,
         position: {
