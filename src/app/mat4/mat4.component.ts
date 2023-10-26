@@ -334,13 +334,13 @@ export class Mat4Component implements OnInit {
   public name:string;
  filterTypes: object = 
   {
-    'quotetype' : ["Is equal to","Contains","Starts With","Ends With","Does not contain"],
+    'quotetype' : ["Contains","Starts With","Ends With","Does not contain"],
     'quoteid' : ["Is equal to"],
-    'name':["Is equal to","Contains","Starts With","Ends With","Does not contain"],
-    'cfu':["Is equal to","Contains","Starts With","Ends With","Does not contain"],
-    'custname':["Is equal to","Contains","Starts With","Ends With","Does not contain"],
-    'opportunity_id':["Is equal to","Contains","Starts With","Ends With","Does not contain"],
-    'status':["Is equal to","Contains","Starts With","Ends With","Does not contain"]
+    'name':["Contains","Starts With","Ends With","Does not contain"],
+    'cfu':["Contains","Starts With","Ends With","Does not contain"],
+    'custname':["Contains","Starts With","Ends With","Does not contain"],
+    'opportunity_id':["Contains","Starts With","Ends With","Does not contain"],
+    'status':["Contains","Starts With","Ends With","Does not contain"]
 
   };
 
@@ -391,144 +391,28 @@ export class Mat4Component implements OnInit {
     this.searchFormInit();
     this.dataSource.filterPredicate = this.getFilterPredicate();
   }
-
-  callAPI1({ pageX, pageY, currentTarget }: MouseEvent):void {
-    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
-    console.log((currentTarget as HTMLElement).getBoundingClientRect());
-    const dialogRef = this.dialog.open(this.callAPIDialog1,{
-      
-        width: '350px',
-        height:'300px',
-        data: { name: this.name},
-        // hasBackdrop: false,
-        position: {
-          // left: `${pageX}px`, top: `${pageY}px`
-          left: `${left + width / 2}px`, top: `${top + height}px`
-        }
-      }
-    );
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-   
-      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
-    });
+  
+  getSpecificDialogue(type : string) {
+    switch(type) {
+      case "quotetype" : return this.callAPIDialog1;
+      case "quoteid" : return this.callAPIDialog2;
+      case "name" : return this.callAPIDialog3;
+      case "cfu" : return this.callAPIDialog4;
+      case "custname" : return this.callAPIDialog5;
+      case "opportunity_id" : return this.callAPIDialog6;
+      case "status" : return this.callAPIDialog7;
+    }
+    return this.callAPIDialog1;
   }
-  callAPI2({ pageX, pageY, currentTarget }: MouseEvent):void {
+  callAPI({ pageX, pageY, currentTarget }: MouseEvent, coltype:string) : void {
     const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
     console.log((currentTarget as HTMLElement).getBoundingClientRect());
-    const dialogRef = this.dialog.open(this.callAPIDialog2,{
+    const dialogRef = this.dialog.open(this.getSpecificDialogue(coltype),{
       
         width: '350px',
         height:'300px',
         data: { name: this.name},
-        // hasBackdrop: false,
         position: {
-          // left: `${pageX}px`, top: `${pageY}px`
-          left: `${left + width / 2}px`, top: `${top + height}px`
-        }
-      }
-    );
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-   
-      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
-    });
-  }
-  callAPI3({ pageX, pageY, currentTarget }: MouseEvent):void {
-    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
-    console.log((currentTarget as HTMLElement).getBoundingClientRect());
-    const dialogRef = this.dialog.open(this.callAPIDialog3,{
-      
-        width: '350px',
-        height:'300px',
-        data: { name: this.name},
-        // hasBackdrop: false,
-        position: {
-          // left: `${pageX}px`, top: `${pageY}px`
-          left: `${left + width / 2}px`, top: `${top + height}px`
-        }
-      }
-    );
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-   
-      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
-    });
-  }
-  callAPI4({ pageX, pageY, currentTarget }: MouseEvent):void {
-    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
-    console.log((currentTarget as HTMLElement).getBoundingClientRect());
-    const dialogRef = this.dialog.open(this.callAPIDialog4,{
-      
-        width: '350px',
-        height:'300px',
-        data: { name: this.name},
-        // hasBackdrop: false,
-        position: {
-          // left: `${pageX}px`, top: `${pageY}px`
-          left: `${left + width / 2}px`, top: `${top + height}px`
-        }
-      }
-    );
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-   
-      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
-    });
-  }
-  callAPI5({ pageX, pageY, currentTarget }: MouseEvent):void {
-    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
-    console.log((currentTarget as HTMLElement).getBoundingClientRect());
-    const dialogRef = this.dialog.open(this.callAPIDialog5,{
-      
-        width: '350px',
-        height:'300px',
-        data: { name: this.name},
-        // hasBackdrop: false,
-        position: {
-          // left: `${pageX}px`, top: `${pageY}px`
-          left: `${left + width / 2}px`, top: `${top + height}px`
-        }
-      }
-    );
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-   
-      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
-    });
-  }
-  callAPI6({ pageX, pageY, currentTarget }: MouseEvent):void {
-    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
-    console.log((currentTarget as HTMLElement).getBoundingClientRect());
-    const dialogRef = this.dialog.open(this.callAPIDialog6,{
-      
-        width: '350px',
-        height:'300px',
-        data: { name: this.name},
-        // hasBackdrop: false,
-        position: {
-          // left: `${pageX}px`, top: `${pageY}px`
-          left: `${left + width / 2}px`, top: `${top + height}px`
-        }
-      }
-    );
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-   
-      this.renderer.removeClass(this.iconElement.nativeElement, 'icon-remove');
-    });
-  }
-   callAPI7({ pageX, pageY, currentTarget }: MouseEvent):void {
-    const { height, width, top, left } = (currentTarget as HTMLElement).getBoundingClientRect();
-    console.log((currentTarget as HTMLElement).getBoundingClientRect());
-    const dialogRef = this.dialog.open(this.callAPIDialog7,{
-      
-        width: '350px',
-        height:'300px',
-        data: { name: this.name},
-        // hasBackdrop: false,
-        position: {
-          // left: `${pageX}px`, top: `${pageY}px`
           left: `${left + width / 2}px`, top: `${top + height}px`
         }
       }
@@ -590,7 +474,10 @@ export class Mat4Component implements OnInit {
       case "Contains":  return colVal.toLowerCase().includes(inVal);
       case "Starts With": return colVal.toLowerCase().startsWith(inVal);
       case "Ends With": return colVal.toLowerCase().endsWith(inVal);
-     // case "Is equal to":return (colVal===olVal).toLowerCase().equals;
+      // case "Is equal to": {console.log("i was matched in the case you mentioned");
+      // console.log("i am the value of ternary", (typeof(colVal) === "string") && (typeof(inVal) === "string"), typeof(colVal));
+      // 
+      //  return ((typeof(colVal) === "string") && (typeof(inVal) === "string")) ? colVal.toLowerCase() === inVal.toLowerCase() : parseFloat(colVal) === parseFloat(inVal);}
       case "Does not contain ": return !colVal.toLowerCase().includes(inVal);
 
     }

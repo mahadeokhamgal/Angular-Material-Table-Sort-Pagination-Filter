@@ -150,7 +150,7 @@
                       (resizeEnd)="onResizeEnd($event, 'position')"
                       [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Quote Type<span #icon>
                           <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
-                              (click)="callAPI1($event)"><mat-icon color="accent"
+                              (click)="callAPI($event, 'quotetype')"><mat-icon color="accent"
                                   class="icon">info_outline</mat-icon></button>
   
                       </span>
@@ -197,7 +197,7 @@
                     (resizeEnd)="onResizeEnd($event, 'position')"
                     [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Quote ID<span #icon>
                         <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
-                            (click)="callAPI2($event)"><mat-icon color="accent"
+                            (click)="callAPI($event, 'quoteid')"><mat-icon color="accent"
                                 class="icon">info_outline</mat-icon></button>
   
                     </span>
@@ -246,7 +246,7 @@
                     (resizeEnd)="onResizeEnd($event, 'position')"
                     [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Quote Name<span #icon>
                         <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
-                            (click)="callAPI3($event)"><mat-icon color="accent"
+                            (click)="callAPI($event, 'name')"><mat-icon color="accent"
                                 class="icon">info_outline</mat-icon></button>
   
                     </span>
@@ -293,7 +293,7 @@
                   (resizeEnd)="onResizeEnd($event, 'position')"
                   [resizeEdges]="{bottom: false, right: true, top: false, left: true}">CFU<span #icon>
                       <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
-                          (click)="callAPI4($event)"><mat-icon color="accent"
+                          (click)="callAPI($event, 'cfu')"><mat-icon color="accent"
                               class="icon">info_outline</mat-icon></button>
   
                   </span>
@@ -340,7 +340,7 @@
                 (resizeEnd)="onResizeEnd($event, 'position')"
                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Customer Name<span #icon>
                     <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
-                        (click)="callAPI5($event)"><mat-icon color="accent"
+                        (click)="callAPI($event, 'custname')"><mat-icon color="accent"
                             class="icon">info_outline</mat-icon></button>
   
                 </span>
@@ -389,7 +389,7 @@
                 (resizeEnd)="onResizeEnd($event, 'position')"
                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Opportunity ID<span #icon>
                     <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
-                        (click)="callAPI6($event)"><mat-icon color="accent"
+                        (click)="callAPI($event, 'opportunity_id')"><mat-icon color="accent"
                             class="icon">info_outline</mat-icon></button>
   
                 </span>
@@ -436,7 +436,7 @@
                 (resizeEnd)="onResizeEnd($event, 'position')"
                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Status<span #icon>
                     <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
-                        (click)="callAPI7($event)"><mat-icon color="accent"
+                        (click)="callAPI($event, 'status')"><mat-icon color="accent"
                             class="icon">info_outline</mat-icon></button>
   
                 </span>
