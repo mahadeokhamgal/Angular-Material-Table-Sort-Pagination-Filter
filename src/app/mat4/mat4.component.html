@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <h1>Table with ang-mat filter+sort</h1>
 </div>
 <div class="mat-elevation-z8">
@@ -21,8 +21,8 @@
                 </td>
             </ng-container>
 
-            <!-- Position Column -->
-            <ng-container matColumnDef="position">
+             Position Column -->
+            <!-- <ng-container matColumnDef="position">
 
                 <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
                     (resizeEnd)="onResizeEnd($event, 'position')"
@@ -69,10 +69,10 @@
                 </th>
                 <td mat-cell *matCellDef="let element"> {{element.position}} </td>
             </ng-container>
-
+ -->
 
             <!-- Name Column -->
-            <ng-container matColumnDef="name">
+            <!-- <ng-container matColumnDef="name">
 
                 <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
                     (resizeEnd)="onResizeEnd($event, 'name')"
@@ -117,100 +117,9 @@
 
 
 
-            <!-- Weight Column -->
-
-            <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
-                    (resizeEnd)="onResizeEnd($event, 'weight')"
-                    [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Weight<span #icon>
-                        <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
-                            (click)="callAPI3($event)"><mat-icon color="accent"
-                                class="icon">info_outline</mat-icon></button>
-
-                    </span>
-                    <ng-template #callAPIDialog3>
-                        <div mat-dialog-content>
-
-
-                            <div>show filter options</div>
-
-                            <mat-form-field class="search__form_field" appearance="outline">
-                                <mat-select placeholder="weight" [(value)]="weightFilterType" appearance="outline">
-                                    <mat-option *ngFor="let type of filterTypes.weight" [value]="type">
-                                        {{type}}
-                                    </mat-option>
-
-                                </mat-select>
-                            </mat-form-field>
-                            <mat-form-field class="search__form_field" appearance="outline">
-                                <input type="number" aria-label="weight" step="0.01" matInput formControlName="weight"
-                                    placeholder="enter weight">
-                            </mat-form-field>
-
-
-                        </div>
-
-                        <div mat-dialog-actions>
-                            <button class="button button-alert" mat-button (click)="applyFilter()">Filter</button>
-                            <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
-
-                        </div>
-                    </ng-template>
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-            </ng-container>
-
-
-
-
-
-            <!-- Symbol Column -->
-
-            <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
-                    (resizeEnd)="onResizeEnd($event, 'symbol')"
-                    [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Symbol<span #icon>
-                        <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
-                            (click)="callAPI4($event)"><mat-icon color="accent"
-                                class="icon">info_outline</mat-icon></button>
-
-                    </span>
-                    <ng-template #callAPIDialog4>
-                        <div mat-dialog-content>
-
-
-                            <div>show filter options</div>
-                            <mat-form-field class="search__form_field" appearance="outline">
-
-                                <mat-select placeholder="symbol" [(value)]="symbolFilterType" appearance="outline">
-                                    <mat-option *ngFor="let type of filterTypes.symbol" [value]="type">
-                                        {{type}}
-                                    </mat-option>
-
-                                </mat-select>
-                            </mat-form-field>
-
-
-                            <mat-form-field class="search__form_field" appearance="outline">
-                                <input type="text" aria-label="symbol" matInput formControlName="symbol"
-                                    placeholder="enter symbol">
-                            </mat-form-field>
-
-
-                        </div>
-
-                        <div mat-dialog-actions>
-                            <button class="button button-alert" mat-button (click)="applyFilter()">Filter</button>
-                            <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
-
-                        </div>
-                    </ng-template>
-                </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-            </ng-container>
-
-
-
+            <-- Weight Column -->
+<!-- 
+            
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mwlResizable [enableGhostResize]="true"
                     (resizeEnd)="onResizeEnd($event, 'action')"
@@ -227,4 +136,379 @@
         </table>
     </form>
     <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20]"> </mat-paginator>
-</div>
+</div> -->
+
+<div>
+    <h1>Table with ang-mat filter+sort</h1>
+  </div>
+  <div class="mat-elevation-z8">
+    <form [formGroup]="searchForm" class="search__form">
+      <table mat-table [dataSource]="dataSource" matSort>
+         
+        <ng-container matColumnDef="quotetype">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+                      (resizeEnd)="onResizeEnd($event, 'position')"
+                      [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Quote Type<span #icon>
+                          <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                              (click)="callAPI1($event)"><mat-icon color="accent"
+                                  class="icon">info_outline</mat-icon></button>
+  
+                      </span>
+    
+              <ng-template #callAPIDialog1>
+                  <div mat-dialog-content>
+                      <div class="card-wrapper">
+  
+                          <mat-card class="example-card">
+                            <mat-card-header>
+                            <h3> show filter options</h3>
+                            </mat-card-header>
+                            <mat-card-content>
+                              <mat-form-field class="search__form_field" appearance="outline">
+                                  <mat-select placeholder="position" [(value)]="quoteTypeFilterOption" appearance="outline">
+                                      <mat-option *ngFor="let type of filterTypes.quotetype" [value]="type">
+                                          {{type}}
+                                      </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                             
+                              <mat-form-field class="search__form_field" appearance="outline">
+                                  <input type="text" aria-label="symbol" matInput formControlName="quotetype"
+                                      placeholder="enter position">
+                              </mat-form-field>
+                            </mat-card-content>
+                        
+                            <mat-card-actions>
+                              <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                              <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                            </mat-card-actions>
+                          </mat-card>
+                        
+                        </div>
+                  </div>
+              </ng-template>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.contract.agreementType}} </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="quoteid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+                    (resizeEnd)="onResizeEnd($event, 'position')"
+                    [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Quote ID<span #icon>
+                        <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                            (click)="callAPI2($event)"><mat-icon color="accent"
+                                class="icon">info_outline</mat-icon></button>
+  
+                    </span>
+  
+            <ng-template #callAPIDialog2>
+                <div mat-dialog-content>
+  
+                    <div class="card-wrapper">
+  
+                        <mat-card class="example-card">
+                          <mat-card-header>
+                          <h3> show filter options</h3>
+                          </mat-card-header>
+                          <mat-card-content>
+                            <mat-form-field class="search__form_field" appearance="outline">
+                                <mat-select placeholder="quoteid filter" [(value)]="quoteidFilterOption" appearance="outline">
+                                    <mat-option *ngFor="let type of filterTypes.quoteid" [value]="type">
+                                        {{type}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                           
+                            <mat-form-field class="search__form_field" appearance="outline">
+                                <input type="number" aria-label="symbol" matInput formControlName="quoteid"
+                                    placeholder="enter quote ID">
+                            </mat-form-field>
+                          </mat-card-content>
+                      
+                          <mat-card-actions>
+                            <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                            <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                          </mat-card-actions>
+                        </mat-card>
+                      
+                      </div>
+                </div>
+            </ng-template>
+        </th>
+        <td mat-cell *matCellDef="let element">{{element.quoteId}} </td>
+    </ng-container>
+  
+  
+  
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+                    (resizeEnd)="onResizeEnd($event, 'position')"
+                    [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Quote Name<span #icon>
+                        <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                            (click)="callAPI3($event)"><mat-icon color="accent"
+                                class="icon">info_outline</mat-icon></button>
+  
+                    </span>
+  
+            <ng-template #callAPIDialog3>
+                <div mat-dialog-content>
+                    <div class="card-wrapper">
+  
+                        <mat-card class="example-card">
+                          <mat-card-header>
+                          <h3> show filter options</h3>
+                          </mat-card-header>
+                          <mat-card-content>
+                            <mat-form-field class="search__form_field" appearance="outline">
+                                <mat-select placeholder="position" [(value)]="quotenameFilterOption" appearance="outline">
+                                    <mat-option *ngFor="let type of filterTypes.name" [value]="type">
+                                        {{type}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                           
+                            <mat-form-field class="search__form_field" appearance="outline">
+                                <input type="number" aria-label="symbol" matInput formControlName="name"
+                                    placeholder="enter Quote name">
+                            </mat-form-field>
+                          </mat-card-content>
+                      
+                          <mat-card-actions>
+                            <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                            <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                          </mat-card-actions>
+                        </mat-card>
+                      
+                      </div>
+                </div>
+            </ng-template>
+        </th>
+        <td mat-cell *matCellDef="let element">{{element.name}} </td>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="cfu">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+                  (resizeEnd)="onResizeEnd($event, 'position')"
+                  [resizeEdges]="{bottom: false, right: true, top: false, left: true}">CFU<span #icon>
+                      <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                          (click)="callAPI4($event)"><mat-icon color="accent"
+                              class="icon">info_outline</mat-icon></button>
+  
+                  </span>
+  
+          <ng-template #callAPIDialog4>
+               <div mat-dialog-content>
+  
+                  <div class="card-wrapper">
+  
+                      <mat-card class="example-card">
+                        <mat-card-header>
+                        <h3> show filter options</h3>
+                        </mat-card-header>
+                        <mat-card-content>
+                          <mat-form-field class="search__form_field" appearance="outline">
+                              <mat-select placeholder="position" [(value)]="cfuFilterOption" appearance="outline">
+                                  <mat-option *ngFor="let type of filterTypes.cfu" [value]="type">
+                                      {{type}}
+                                  </mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                         
+                          <mat-form-field class="search__form_field" appearance="outline">
+                              <input type="number" aria-label="symbol" matInput formControlName="cfu"
+                                  placeholder="enter position">
+                          </mat-form-field>
+                        </mat-card-content>
+                    
+                        <mat-card-actions>
+                          <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                          <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                        </mat-card-actions>
+                      </mat-card>
+                    
+                    </div>
+              </div>
+          </ng-template>
+      </th>
+    <td mat-cell *matCellDef="let element">{{element.cfu}} </td>
+  </ng-container> 
+  
+  <ng-container matColumnDef="custname">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+                (resizeEnd)="onResizeEnd($event, 'position')"
+                [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Customer Name<span #icon>
+                    <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                        (click)="callAPI5($event)"><mat-icon color="accent"
+                            class="icon">info_outline</mat-icon></button>
+  
+                </span>
+  
+        <ng-template #callAPIDialog5>
+            <div mat-dialog-content>
+  
+                <div class="card-wrapper">
+  
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                      <h3> show filter options</h3>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-form-field class="search__form_field" appearance="outline">
+                            <mat-select placeholder="customer name filter" [(value)]="custnameFilterOption" appearance="outline">
+                                <mat-option *ngFor="let type of filterTypes.custname" [value]="type">
+                                    {{type}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                       
+                        <mat-form-field class="search__form_field" appearance="outline">
+                            <input type="number" aria-label="symbol" matInput formControlName="custname"
+                                placeholder="enter cfu">
+                        </mat-form-field>
+                      </mat-card-content>
+                  
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                        <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                      </mat-card-actions>
+                    </mat-card>
+                  
+                  </div>
+            </div>
+        </ng-template>
+    </th>
+    <td mat-cell *matCellDef="let element">{{element.customer.name}} </td>
+  </ng-container>  
+  
+  
+  
+  <ng-container matColumnDef="opportunity_id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+                (resizeEnd)="onResizeEnd($event, 'position')"
+                [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Opportunity ID<span #icon>
+                    <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                        (click)="callAPI6($event)"><mat-icon color="accent"
+                            class="icon">info_outline</mat-icon></button>
+  
+                </span>
+  
+        <ng-template #callAPIDialog6>
+            <div mat-dialog-content>
+  
+                <div class="card-wrapper">
+  
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                      <h3> show filter options</h3>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-form-field class="search__form_field" appearance="outline">
+                            <mat-select placeholder="position" [(value)]="opportunity_idFilterOption" appearance="outline">
+                                <mat-option *ngFor="let type of filterTypes.opportunity_id" [value]="type">
+                                    {{type}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                       
+                        <mat-form-field class="search__form_field" appearance="outline">
+                            <input type="text" aria-label="symbol" matInput formControlName="opportunity_id"
+                                placeholder="enter position">
+                        </mat-form-field>
+                      </mat-card-content>
+                  
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                        <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                      </mat-card-actions>
+                    </mat-card>
+                  
+                  </div>
+            </div>
+        </ng-template>
+    </th>
+    <td mat-cell *matCellDef="let element">{{element.opportunity.opportunityId}} </td>
+  </ng-container>  
+   
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+                (resizeEnd)="onResizeEnd($event, 'position')"
+                [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Status<span #icon>
+                    <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                        (click)="callAPI7($event)"><mat-icon color="accent"
+                            class="icon">info_outline</mat-icon></button>
+  
+                </span>
+  
+        <ng-template #callAPIDialog7>
+            <div mat-dialog-content>
+                <div class="card-wrapper">
+  
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                      <h3> show filter options</h3>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-form-field class="search__form_field" appearance="outline">
+                            <mat-select placeholder="position" [(value)]="statusFilterOption" appearance="outline">
+                                <mat-option *ngFor="let type of filterTypes.status" [value]="type">
+                                    {{type}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                       
+                        <mat-form-field class="search__form_field" appearance="outline">
+                            <input type="text" aria-label="symbol" matInput formControlName="statusFilterOption"
+                                placeholder="enter status">
+                        </mat-form-field>
+                      </mat-card-content>
+                  
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                        <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                      </mat-card-actions>
+                    </mat-card>
+                  
+                  </div>
+            </div>
+        </ng-template>
+    </th>
+    <td mat-cell *matCellDef="let element">{{element.status}} </td>
+  </ng-container>  
+  
+  
+      <ng-container matColumnDef="install">
+        <th mat-header-cell *matHeaderCellDef mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, 'action')"
+        [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Install</th>
+        <td mat-cell *matCellDef="let element"> {{element.totalUpfront}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="monthly">
+        <th mat-header-cell *matHeaderCellDef mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, 'action')"
+        [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Monthly</th>
+        <td mat-cell *matCellDef="let element"> {{element.totalMonthly}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, 'action')"
+        [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Created On</th>
+        <td mat-cell *matCellDef="let element"> {{element.createdDate}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="updatedDate">
+        <th mat-header-cell *matHeaderCellDef mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, 'action')"
+        [resizeEdges]="{bottom: false, right: true, top: false, left: true}"> Updated On</th>
+        <td mat-cell *matCellDef="let element"> {{element.updatedDate}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;"
+      (click)="selectedRow = selectedRow === row ? null : row"
+      [ngClass]="{ 'selected': row === selectedRow }"></tr>
+    </table>
+   
+  </form>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="page_size_options"> </mat-paginator>
+  </div>
+   
