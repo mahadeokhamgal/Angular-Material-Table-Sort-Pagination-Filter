@@ -7,6 +7,7 @@ import { MaterialModule } from './material.module';
 import { Mat4Module } from './mat4/mat4.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -23,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
     Mat4Module,
     RouterModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
