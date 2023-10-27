@@ -21,8 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     ReactiveFormsModule,
     MatPaginatorModule,
-    MatIconModule
-    
+    MatIconModule,
   ]
 })
 export class Mat4Module {
