@@ -79,12 +79,12 @@ export class Mat4Component implements OnInit {
     console.log("oninit called", window.location.pathname);
     
     this.buildGrid([]);
-    if(window.location.pathname == "/mat4/mine") {
+    if(window.location.href.includes("mat4/mine")) {
       this.qlist.getMyQuotes().subscribe((res: any) => {
         console.log("got the data for mine", res);
         this.buildGrid(res);
       })
-    } else if(window.location.pathname == "/mat4/all"){
+    } else if(window.location.href.includes("mat4/all")){
       this.qlist.getAllQuotes().subscribe((res: any) => {
         console.log("got the data for all", res);
         this.buildGrid(res);

@@ -6,7 +6,7 @@ import { Mat4Component } from './mat4/mat4.component';
 const routes = [
       {path: 'mat4/all', component: Mat4Component},
       {path: 'mat4/mine', component: Mat4Component},
-      {path: '', redirectTo:'mat4'},
+      {path: '', redirectTo:'mat4/mine'},
 ];
 
 @NgModule({
