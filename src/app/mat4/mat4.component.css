@@ -61,8 +61,10 @@ mat-paginator {
  .mat-mdc-header-row {
   background-color: antiquewhite;
 } 
-
- .mat-mdc-row:nth-child(even){
+.selected {
+  background-color: #2aa3ad;
+}
+ .mat-mdc-row:not(.selected):nth-child(odd) {
   background-color:aquamarine;
 } 
 
@@ -70,9 +72,7 @@ mat-paginator {
   background-color:#f2fafa;
 }*/
 
-.selected {
-  background-color: #2aa3ad;
-}
+
 mat-form-field{
   margin: 20px;
 } 
