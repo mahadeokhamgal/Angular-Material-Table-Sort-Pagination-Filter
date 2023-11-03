@@ -49,7 +49,7 @@ export class Mat4Component implements OnInit {
   public custnameFilterOption = this.filterTypes['custname'][0];
   public opportunity_idFilterOption = this.filterTypes['opportunity_id'][0];
   public statusFilterOption = this.filterTypes['status'][0];
-
+  public dataLoaded = false;
 
   dataSource = new MatTableDataSource<any>([]);
   selection = new SelectionModel<any>(true, []);
@@ -77,17 +77,32 @@ export class Mat4Component implements OnInit {
   }
   ngOnInit() {
     console.log("oninit called", window.location.pathname);
+    this.dataLoaded = false;
     
     this.buildGrid([]);
     if(window.location.href.includes("mat4/mine")) {
       this.qlist.getMyQuotes().subscribe((res: any) => {
         console.log("got the data for mine", res);
         this.buildGrid(res);
+        this.dataLoaded = true;
       })
     } else if(window.location.href.includes("mat4/all")){
       this.qlist.getAllQuotes().subscribe((res: any) => {
         console.log("got the data for all", res);
         this.buildGrid(res);
+      })
+    }
+  }
+  refreshMethod(){
+    if(window.location.href.includes("mat4/mine")) {
+      this.qlist.getMyQuotes().subscribe((res: any) => {
+        this.buildGrid(res);
+        this.dataLoaded = true;
+      })
+    } else if(window.location.href.includes("mat4/all")){
+      this.qlist.getAllQuotes().subscribe((res: any) => {
+        this.buildGrid(res);
+        this.dataLoaded = true;
       })
     }
   }
