@@ -74,36 +74,35 @@ export class Mat4Component implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.searchFormInit();
     this.dataSource.filterPredicate = this.getFilterPredicate();
+    this.dataLoaded = true;
   }
   ngOnInit() {
     console.log("oninit called", window.location.pathname);
     this.dataLoaded = false;
-    
     this.buildGrid([]);
+    this.dataLoaded = false;
     if(window.location.href.includes("mat4/mine")) {
       this.qlist.getMyQuotes().subscribe((res: any) => {
         console.log("got the data for mine", res);
         this.buildGrid(res);
-        this.dataLoaded = true;
       })
     } else if(window.location.href.includes("mat4/all")){
       this.qlist.getAllQuotes().subscribe((res: any) => {
         console.log("got the data for all", res);
         this.buildGrid(res);
-        this.dataLoaded = true;
       })
     }
   }
   refreshMethod(){
+    this.dataLoaded = false;
     if(window.location.href.includes("mat4/mine")) {
       this.qlist.getMyQuotes().subscribe((res: any) => {
         this.buildGrid(res);
-        this.dataLoaded = true;
+        
       })
     } else if(window.location.href.includes("mat4/all")){
       this.qlist.getAllQuotes().subscribe((res: any) => {
         this.buildGrid(res);
-        this.dataLoaded = true;
       })
     }
   }

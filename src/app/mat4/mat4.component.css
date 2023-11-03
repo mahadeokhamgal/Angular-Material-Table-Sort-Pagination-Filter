@@ -77,3 +77,14 @@ mat-form-field{
   margin: 20px;
 } 
 
+.spinner {
+  animation: rotator 1.4s linear infinite;
+}
+@keyframes rotator {
+  from  {
+    transform: rotate(0deg);
+ }
+ to {
+    transform: rotate(360deg);
+  }	
+}
