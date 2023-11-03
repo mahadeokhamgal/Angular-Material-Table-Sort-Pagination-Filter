@@ -90,6 +90,7 @@ export class Mat4Component implements OnInit {
       this.qlist.getAllQuotes().subscribe((res: any) => {
         console.log("got the data for all", res);
         this.buildGrid(res);
+        this.dataLoaded = true;
       })
     }
   }
