@@ -1,10 +1,867 @@
+<div class="row module-title">
+  <div class="col-xs-6">
+    <span class="section">Quotes</span>
+    <span class="page" style="font-size: medium;">&nbsp; &nbsp;{{title}}</span>
+    <span (click)="refreshMethod()" style="transform-origin: top; cursor: pointer;">
+      <mat-icon [ngClass]="{'spinner' : !dataLoaded}">autorenew</mat-icon>
+    </span>
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+
+
+    <ng-template #content let-modal>
+      <div class="modal-body search-modal-body">
+        <div class="row startDate">
+          <div class="container">
+            <ul class="nav nav-tabs">
+              <li [ngClass]="{'active' : (selectedTabValue==='Date')}"><a (click)="selectedTab('Date')"
+                  style="font-size: 13px; padding: 7.5px 9px 7.5px;" data-toggle="tab">Dates</a></li>
+              <li [ngClass]="{'active':(selectedTabValue === 'Quote ID')}"><a (click)="selectedTab('Quote ID')"
+                  style="font-size: 13px;padding: 7.5px 9px 7.5px;" data-toggle="tab">Quote ID</a></li>
+              <li [ngClass]="{'active':(selectedTabValue === 'Opportunity ID')}"><a
+                  (click)="selectedTab('Opportunity ID')" style="font-size: 13px;padding: 7.5px 9px 7.5px;"
+                  data-toggle="tab">Opportunity ID</a></li>
+              <li [ngClass]="{'active':(selectedTabValue==='Customer Name')}"><a (click)="selectedTab('Customer Name')"
+                  style="font-size: 13px;padding: 7.5px 9px 7.5px;" data-toggle="tab">Customer Name</a></li>
+            </ul>
+
+            <div class="row startDate" for="description">Filter Quotes By {{selectedTabValue}}</div>
+
+            <div id="dateFilter" *ngIf="selectedTabValue === 'Date'">
+              <form [formGroup]="DatePickerForm" (ngSubmit)="onSubmit()">
+
+                <div>
+                  <label for="from-date">From Date: </label>
+                  <input id="fromdate" type="date" formControlName="from_Date">
+                </div>
+                <div>
+                  <label for="to-date">To Date: </label>
+                  <input id="todate" type="date" formControlName="to_date">
+                </div>
+                <span class="end-date-warn">*can only filter 30 days data.</span>
+
+                <div class="row" style="margin-top: 5px; margin-bottom: 3px;">
+                  <div class="col-md-6">
+                    <input type="submit" value="Search" class="btn btn-success">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="submit" value="Close" class="btn btn-primary">
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div id="QuoteIdFilter" *ngIf="selectedTabValue === 'Quote ID'">
+              <form [formGroup]="quoteIdPickerForm" autocomplete="off">
+                <div>
+                  <label for="quotePicker" class="label-control floleft">Quote ID:</label>
+                  <input type="text" name="quotePicker" class="form-control resize-font" formControlName="quote_id"
+                    placeholder="Please Enter Quote ID" autocomplete="off"(input)="change($event)" (keypress)="onKeyUp($event)">
+
+                  <div *ngIf="quoteIdPickerForm.controls.quote_id.errors" class="error">
+                    <div *ngIf="quoteIdPickerForm.controls.quote_id.errors.required" class="error">
+                      Quote Id should not be empty.
+                    </div>
+                    <div *ngIf="quoteIdPickerForm.controls.quote_id.errors.pattern">
+                      Only numbers are allowed to search with QuoteID.
+                    </div>
+                    <div *ngIf="quoteIdPickerForm.controls.quote_id.errors">
+                      Quote Id should be more than 3 digits
+                      and less than 6 digits.
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 5px; margin-bottom: 3px;">
+                  <div class="col-md-6">
+                    <input type="submit" value="Search" class="btn btn-success" (click)="onSubmit(quoteIdPickerForm)">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="button" value="Close" class="btn btn-primary" (click)="modalclose()">
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+            <div id="opportunityIdPicker" *ngIf="selectedTabValue === 'Opportunity ID'">
+              <form [formGroup]="opportunityIdPicker">
+                <div>
+                  <label for="quotePicker" class="label-control floleft">Opportunity ID:</label>
+                  <input type="text" name="opportunitypicker" class="form-control resize-font"
+                    formControlName="opportunity_id" placeholder="Please Enter Opportunity ID" autocomplete="off">
+                  <!-- <div *ngIf="quoteIdPickerForm.controls.quote_id.errors" class = "error"> 
+                <div *ngIf="quoteIdPickerForm.controls.quote_id.errors.required" class = "error"> 
+                  Quote Id should not be empty.
+                </div>
+                <div *ngIf="quoteIdPickerForm.controls.quote_id.errors.pattern">
+                  Only numbers are allowed to search with QuoteID.
+                </div> 
+              </div>-->
+                </div>
+                <div class="row" style="margin-top: 5px; margin-bottom: 3px;">
+                  <div class="col-md-6">
+                    <input type="submit" value="Search" class="btn btn-success" (click)="onSubmit()">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="button" value="Close" class="btn btn-primary" (click)="modalclose()">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <!--
+        <div id="opportunityIdPicker" *ngIf="selectedTabValue === 'Opportunity ID'">
+
+          <div class="form-group formtabs required col-md-6">
+            <label for="opportunityPicker" class="label-control floleft">Opportunity ID:</label>
+            <input type="text" name="opportunityPicker" class="form-control resize-font"
+              placeholder="Please Enter Opportunity ID" autocomplete="off">
+          </div>
+          <span class="help-block align">Opportunity Id should not be
+            empty.</span>
+          <span class="help-block align">Opportunity Id should be like
+            '1-AAAAAA'.</span>
+        </div>
+
+        <div id="customerNamePicker" *ngIf="selectedTabValue==='Customer Name'">
+
+          <div class="form-group formtabs required col-md-6">
+
+            <label for="customerPicker" class="label-control floleft">Customer Name:</label>
+
+
+            <input type="text" name="customerPicker" class="form-control resize-font"
+              placeholder="Please Enter customer name" autocomplete="off">
+
+
+          </div>
+          <div class="help-block align">
+            Please enter and select a valid customer name.
+          </div>
+          <div class="help-block align">
+            Only letters, numbers and special characters like "_",<br /> "&" are allowed to search
+            customer.
+          </div>
+          <div class="help-block align">
+            Please Enter At least three Characters.
+          </div>
+
+        </div>
+      </div>
+  </div> -->
+    <!-- </div>
+
+
+  <div class="row" style="margin-top: 5px; margin-bottom: 3px;">
+    <div class="col-md-6">
+      <input type="submit" value="Search" class="btn btn-success">
+    </div>
+    <div class="col-md-6">
+      <input type="submit" value="Close" class="btn btn-primary">
+    </div>
+  </div>
+</div>
+</div>
+</ng-template> -->
+
+
+
+
+
+    <!--
+            <div class="tab-pane fade stat" name="QuoteID" id="quoteIdPicker">
+              <form name="quoteForm"
+                ng-class="{'has-error' : self.qIdEmptyErr || self.quoteLenErr || self.quoteNumErr || quoteForm.quotePicker.$error.quoteKeyword}">
+                <div class="form-group formtabs">
+                  <label for="quotePicker" class="label-control floleft">Quote ID:</label>
+                  <input type="text" name="quotePicker" class="form-control resize-font"
+                    placeholder="Please Enter Quote ID" ng-model="self.userInputQuoteId"
+                    ng-blur="self.updateInputFieldErr('qId', quoteForm)" autocomplete="off"
+                    ng-change="self.quoteIdChange(quoteForm, '{{self.userInputQuoteId}}')">
+                </div>
+                <span class="help-block align" ng-show="self.qIdEmptyErr">Quote Id should not be empty.</span>
+                <span class="help-block align" ng-show="self.quoteLenErr">Quote Id should be more than 3 digits
+                  and less than 6 digits.</span>
+                <span class="help-block align" ng-show="self.quoteNumErr">Quote Id should be greater than
+                  100</span>
+                <span class="help-block align" ng-show="(quoteForm.quotePicker.$error.quoteKeyword)">
+                  Only numbers are allowed to search with QuoteID.
+                </span>
+              </form>
+            </div>
+
+            <div class="tab-pane fade stat" id="opportunityIdPicker">
+              <form name="oppForm" ng-class="{'has-error' : self.oppPattErr || self.oppEmptyErr}">
+                <div class="form-group formtabs">
+                  <label for="opportunityPicker" class="label-control floleft">Opportunity ID:</label>
+                  <input type="string" name="opportunityPicker" class="form-control resize-font"
+                    placeholder="Please Enter Opportunity ID" ng-model="self.userInputOppId" autocomplete="off"
+                    ng-change="self.oppIdChange()">
+                </div>
+                <span class="help-block align" ng-show="self.oppEmptyErr">Opportunity Id should not be
+                  empty.</span>
+                <span class="help-block align" ng-show="self.oppPattErr">Opportunity Id should be like
+                  '1-AAAAAA'.</span>
+              </form>
+            </div>
+
+            <div class="tab-pane fade stat" id="customerNamePicker">
+              <form name="customerForm"
+                ng-class="{'has-error' : customerForm.customer.$error.searchKeyword || (customerForm.customer.$invalid) || self.cNameEmptyErr }">
+
+                <div id="customerWrap" class="form-group valid-feedback feedback-icon position-relative search-align">
+                  <label for="customerPicker" class="label-control floleft">Customer Name:</label>
+                  <input data-testId="customerDetailsSearch" type="text" maxlength="100" id="customer" name="customer"
+                    class="form-control resize-font" autocomplete="off" placeholder="Search using customer name or UID"
+                    ng-model-options="{debounce: 200}" ng-model="self.customer"
+                    uib-typeahead="customer as customer.name for customer in self.getCustomers($viewValue)"
+                    typeahead-template-url="./app/components/quote/common/customer-dropdown.tpl.html"
+                    ng-class="{'autocomplete-loading': self.customerLoading}" typeahead-min-length="999"
+                    typeahead-loading="self.customerLoading" typeahead-search='self.triggerCustomerTypeahead'
+                    ng-required='required' ng-change="self.customerChange(customerForm)"
+                    typeahead-on-select="self.onCustomerSelect(customerForm)">
+
+                  <i class="fa fa-search searchIcon" ng-hide="self.customerLoading"
+                    ng-click="self.triggerCustomerSearch(customerForm)"></i>
+                </div>
+                <div class="help-block align" ng-show="self.cNameEmptyErr">
+                  Please enter and select a valid customer name.
+                </div>
+                <div class="help-block align" ng-show="(customerForm.customer.$error.searchKeyword)">
+                  Only letters, numbers and special characters like "_",<br /> "&" are allowed to search
+                  customer.
+                </div>
+                <div class="help-block align" ng-show="(customerForm.customer.$error.lenErr)">
+                  Please Enter At least three Characters.
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 5px; margin-bottom: 3px;">
+            <div class="col-md-6">
+              <input type="submit" value="Search" class="btn btn-success" ng-click="self.searchQuote()">
+            </div>
+            <div class="col-md-6">
+              <input type="submit" value="Close" class="btn btn-primary" ng-click="self.closePopup()">
+            </div>
+          </div> -->
+
+    <!-- //Added for SDI-3435 && SDI-3563:End -->
+    <div class="mat-elevation-z8">
+
+      <form [formGroup]="searchForm" class="search__form">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="quotetype">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'position')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+              <span #icon>
+                <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                  (click)="callAPI($event, 'quotetype')">
+                  <!-- <mat-icon aria-hidden="false" aria-label="Example home icon">info</mat-icon> -->
+                  <mat-icon color="primary" class="icon">arrow_drop_down_circle</mat-icon>
+                </button>
+                <!-- <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon> -->
+                <!-- <icon src="assets/filter.png"></icon> 
+            <img src="../../assets/1.png"  style="height: 5mm; width: 5mm;" class="image"> -->
+              </span>Quote Type
+
+
+              <ng-template #callAPIDialog1>
+                <div mat-dialog-content>
+                  <div class="card-wrapper">
+
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                        <h3> show filter options</h3>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <mat-select placeholder="position" [(value)]="quoteTypeFilterOption" appearance="outline">
+                            <mat-option *ngFor="let type of filterTypes.quotetype" [value]="type">
+                              {{type}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <input type="text" aria-label="symbol" matInput formControlName="quotetype"
+                            placeholder="enter position">
+                        </mat-form-field>
+                      </mat-card-content>
+
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                        <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                      </mat-card-actions>
+                    </mat-card>
+
+                  </div>
+                </div>
+              </ng-template>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.contract.agreementType}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="quoteid">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'position')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Quote ID<span #icon>
+                <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                  (click)="callAPI($event, 'quoteid')">
+                  <mat-icon color="accent" class="icon">info_outline</mat-icon>
+                </button>
+
+              </span>
+
+              <ng-template #callAPIDialog2>
+                <div mat-dialog-content>
+
+                  <div class="card-wrapper">
+
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                        <h3> show filter options</h3>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <mat-select placeholder="quoteid filter" [(value)]="quoteidFilterOption" appearance="outline">
+                            <mat-option *ngFor="let type of filterTypes.quoteid" [value]="type">
+                              {{type}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <input type="number" aria-label="symbol" matInput formControlName="quoteid"
+                            placeholder="enter quote ID">
+                        </mat-form-field>
+                      </mat-card-content>
+
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                        <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                      </mat-card-actions>
+                    </mat-card>
+
+                  </div>
+                </div>
+              </ng-template>
+            </th>
+            <td mat-cell *matCellDef="let element">{{element.quoteId}} </td>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'position')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Quote Name<span #icon>
+                <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                  (click)="callAPI($event, 'name')">
+                  <mat-icon color="accent" class="icon">info_outline</mat-icon>
+                </button>
+
+              </span>
+
+              <ng-template #callAPIDialog3>
+                <div mat-dialog-content>
+                  <div class="card-wrapper">
+
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                        <h3> show filter options</h3>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <mat-select placeholder="position" [(value)]="quotenameFilterOption" appearance="outline">
+                            <mat-option *ngFor="let type of filterTypes.name" [value]="type">
+                              {{type}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <input type="text" aria-label="symbol" matInput formControlName="name"
+                            placeholder="enter Quote name">
+                        </mat-form-field>
+                      </mat-card-content>
+
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                        <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                      </mat-card-actions>
+                    </mat-card>
+
+                  </div>
+                </div>
+              </ng-template>
+            </th>
+            <td mat-cell *matCellDef="let element">{{element.name}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="cfu">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'position')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}">CFU<span #icon>
+                <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                  (click)="callAPI($event, 'cfu')">
+                  <mat-icon color="accent" class="icon">info_outline</mat-icon>
+                </button>
+
+              </span>
+
+              <ng-template #callAPIDialog4>
+                <div mat-dialog-content>
+
+                  <div class="card-wrapper">
+
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                        <h3> show filter options</h3>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <mat-select placeholder="position" [(value)]="cfuFilterOption" appearance="outline">
+                            <mat-option *ngFor="let type of filterTypes.cfu" [value]="type">
+                              {{type}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <input type="text" aria-label="symbol" matInput formControlName="cfu" placeholder="enter cfu">
+                        </mat-form-field>
+                      </mat-card-content>
+
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                        <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                      </mat-card-actions>
+                    </mat-card>
+
+                  </div>
+                </div>
+              </ng-template>
+            </th>
+            <td mat-cell *matCellDef="let element">{{element.cfu}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="custname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'position')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Customer Name<span #icon>
+                <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                  (click)="callAPI($event, 'custname')">
+                  <mat-icon color="accent" class="icon">info_outline</mat-icon>
+                </button>
+
+              </span>
+
+              <ng-template #callAPIDialog5>
+                <div mat-dialog-content>
+
+                  <div class="card-wrapper">
+
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                        <h3> show filter options</h3>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <mat-select placeholder="customer name filter" [(value)]="custnameFilterOption"
+                            appearance="outline">
+                            <mat-option *ngFor="let type of filterTypes.custname" [value]="type">
+                              {{type}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <input type="text" aria-label="symbol" matInput formControlName="custname"
+                            placeholder="enter cfu">
+                        </mat-form-field>
+                      </mat-card-content>
+
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                        <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                      </mat-card-actions>
+                    </mat-card>
+
+                  </div>
+                </div>
+              </ng-template>
+            </th>
+            <td mat-cell *matCellDef="let element">{{element.customer.name}} </td>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="opportunity_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'position')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Opportunity ID<span #icon>
+                <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                  (click)="callAPI($event, 'opportunity_id')">
+                  <mat-icon color="accent" class="icon">info_outline</mat-icon>
+                </button>
+
+              </span>
+
+              <ng-template #callAPIDialog6>
+                <div mat-dialog-content>
+
+                  <div class="card-wrapper">
+
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                        <h3> show filter options</h3>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <mat-select placeholder="position" [(value)]="opportunity_idFilterOption"
+                            appearance="outline">
+                            <mat-option *ngFor="let type of filterTypes.opportunity_id" [value]="type">
+                              {{type}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <input type="text" aria-label="symbol" matInput formControlName="opportunity_id"
+                            placeholder="enter opportunity id">
+                        </mat-form-field>
+                      </mat-card-content>
+
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                        <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                      </mat-card-actions>
+                    </mat-card>
+
+                  </div>
+                </div>
+              </ng-template>
+            </th>
+            <td mat-cell *matCellDef="let element">{{element.opportunity.opportunityId}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'position')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Status<span #icon>
+                <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
+                  (click)="callAPI($event, 'status')">
+                  <mat-icon color="accent" class="icon">info_outline</mat-icon>
+                </button>
+
+              </span>
+
+              <ng-template #callAPIDialog7>
+                <div mat-dialog-content>
+                  <div class="card-wrapper">
+
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                        <h3> show filter options</h3>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <mat-select placeholder="position" [(value)]="statusFilterOption" appearance="outline">
+                            <mat-option *ngFor="let type of filterTypes.status" [value]="type">
+                              {{type}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="search__form_field" appearance="outline">
+                          <input type="text" aria-label="symbol" matInput formControlName="statusFilterOption"
+                            placeholder="enter status">
+                        </mat-form-field>
+                      </mat-card-content>
+
+                      <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+                        <button class="mat-button-Success" mat-button (click)="onCancel()">close</button>
+                      </mat-card-actions>
+                    </mat-card>
+
+                  </div>
+                </div>
+              </ng-template>
+            </th>
+            <td mat-cell *matCellDef="let element">{{element.status}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="install">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'action')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Install</th>
+            <td mat-cell *matCellDef="let element"> {{element.totalUpfront}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="monthly">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'action')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Monthly</th>
+            <td mat-cell *matCellDef="let element"> {{element.totalMonthly}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'action')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}">Created On</th>
+            <td mat-cell *matCellDef="let element"> {{element.createdDate}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updatedDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true"
+              (resizeEnd)="onResizeEnd($event, 'action')"
+              [resizeEdges]="{bottom: false, right: true, top: false, left: true}"> Updated On</th>
+            <td mat-cell *matCellDef="let element"> {{element.updatedDate}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            (click)="selectedRow = selectedRow === row ? null : row" [ngClass]="{ 'selected': row === selectedRow }">
+          </tr>
+        </table>
+
+      </form>
+      <div class="d-flex justify-content-center">
+        <!-- <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls> -->
+      </div>
+      <!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="page_size_options"> </mat-paginator> -->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+
 <div>
     <h1>Table with ang-mat filter+sort</h1>
     <h2><a href="#/mat4/all">All Quotes</a></h2>
     <h2><a href="#/mat4/mine">My Quotes</a></h2>
     <span (click)="refreshMethod()"><mat-icon [ngClass]="{'spinner' : !dataLoaded}">autorenew</mat-icon></span>
-  </div>
-  <div class="mat-elevation-z8">
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+  </div>-->
+
+    <!-- <tabset> 
+    <tab heading="GeeksforGeeks"> 
+        Tabs component in Angular ngx bootstrap 
+    </tab> 
+    <tab heading="GeeksforGeeks1"> 
+        Tabs component in Angular ngx bootstrap 
+    </tab> 
+    <tab heading="GeeksforGeeks2"> 
+        Tabs component in Angular ngx bootstrap 
+    </tab> 
+</tabset>  -->
+    <!-- <ng-tabset>
+  <ng-tab title="Tab One">
+    <ng-template ngbTabContent>
+      <p>Tab one content here</p>
+    </ng-template>
+  </ng-tab>
+  <ng-tab title="Tab Two">
+    <ng-template ngbTabContent>
+      <p>Tab two content here</p>
+    </ng-template>
+  </ng-tab>
+  <ng-tab title="Tab Three">
+    <ng-template ngbTabContent>
+      <p>Tab three content here</p>
+    </ng-template>
+  </ng-tab>
+</ng-tabset> -->
+    <!--
+<ng-template #callAPIDialog1>
+  <div class="modal-body search-modal-body">
+    <mat-tab-group>
+      <mat-tab label="First"> 
+        
+        <form>
+          <div class="form-group">
+              <label for="startDate" class="label-control floleft">From
+                  Date:</label>
+              <input type="date" name="startDate" class="form-control resize-font"
+                  placeholder="Please Select Start Date" min="2000-01-01">
+              <span class="end-msg">Selected date should be less than today's
+                  date. </span>
+          </div>
+          <div class="form-group">
+              <label for="endDate" class="label-control floleft">To Date:</label>
+              <input type="date" name="endDate" id="endDate" class="form-control resize-font"
+                  placeholder="Please Select End Date" min="2000-01-01" 
+                 disabled>
+          </div>
+          <div class="row">
+              <span class="end-date-warn">*can only filter 30 days data.</span>
+          </div>
+      </form>
+      </mat-tab>
+      <mat-tab label="Second"> Content 2 </mat-tab>
+      <mat-tab label="Third"> Content 3 </mat-tab>
+    </mat-tab-group>
+        </div>
+
+</ng-template>
+
+  <ng-template #content let-modal>   
+
+    <div class="modal-body search-modal-body">
+      <div class="row startDate">
+          <div class="container">
+           
+              <ul class="nav nav-tabs">
+                  <li class="active"><a 
+                          style="font-size: 13px; padding: 7.5px 9px 7.5px;" data-toggle="tab"
+                          href="#dateFilter">Dates</a></li>
+                  <li><a (click)="selectedTab('Quote ID')" style="font-size: 13px;padding: 7.5px 9px 7.5px;"
+                          data-toggle="tab" href="#quoteIdPicker">Quote ID</a></li>
+                  <li><a (click)="selectedTab('Opportunity ID')" style="font-size: 13px;padding: 7.5px 9px 7.5px;"
+                          data-toggle="tab" href="#opportunityIdPicker">Opportunity ID</a></li>
+                  <li><a (click)="selectedTab('Customer Name')" style="font-size: 13px;padding: 7.5px 9px 7.5px;"
+                          data-toggle="tab" href="#customerNamePicker">Customer Name</a></li>
+              </ul>
+     
+
+  
+           <div class="row startDate" for="description">Filter Quotes By </div> 
+  
+              
+                      <form>
+                          <div class="form-group">
+                              <label for="startDate" class="label-control floleft">From
+                                  Date:</label>
+                              <input type="date" name="startDate" class="form-control resize-font"
+                                  placeholder="Please Select Start Date" min="2000-01-01">
+                              <span class="end-msg">Selected date should be less than today's
+                                  date. </span>
+                          </div>
+                          <div class="form-group">
+                              <label for="endDate" class="label-control floleft">To Date:</label>
+                              <input type="date" name="endDate" id="endDate" class="form-control resize-font"
+                                  placeholder="Please Select End Date" min="2000-01-01" 
+                                 disabled>
+                          </div>
+                          <div class="row">
+                              <span class="end-date-warn">*can only filter 30 days data.</span>
+                          </div>
+                      </form>
+                  </div>
+                </div>
+              </div>
+       
+          </ng-template>
+        -->
+    <!--
+                <div class="tab-pane fade stat" name="QuoteID" id="quoteIdPicker">
+                      <form name="quoteForm"
+                          ng-class="{'has-error' : self.qIdEmptyErr || self.quoteLenErr || self.quoteNumErr || quoteForm.quotePicker.$error.quoteKeyword}">
+                          <div class="form-group formtabs">
+                              <label for="quotePicker" class="label-control floleft">Quote ID:</label>
+                              <input type="text" name="quotePicker" class="form-control resize-font"
+                                  placeholder="Please Enter Quote ID" ng-model="self.userInputQuoteId"
+                                  ng-blur="self.updateInputFieldErr('qId', quoteForm)" autocomplete="off"
+                                  ng-change="self.quoteIdChange(quoteForm, '{{self.userInputQuoteId}}')">
+                          </div>
+                          <span class="help-block align" ng-show="self.qIdEmptyErr">Quote Id should not be empty.</span>
+                          <span class="help-block align" ng-show="self.quoteLenErr">Quote Id should be more than 3 digits
+                              and less than 6 digits.</span>
+                          <span class="help-block align" ng-show="self.quoteNumErr">Quote Id should be greater than
+                              100</span>
+                          <span class="help-block align" ng-show="(quoteForm.quotePicker.$error.quoteKeyword)">
+                              Only numbers are allowed to search with QuoteID.
+                          </span>
+                      </form>
+                  </div>
+  
+                  <div class="tab-pane fade stat" id="opportunityIdPicker">
+                      <form name="oppForm" ng-class="{'has-error' : self.oppPattErr || self.oppEmptyErr}">
+                          <div class="form-group formtabs">
+                              <label for="opportunityPicker" class="label-control floleft">Opportunity ID:</label>
+                              <input type="string" name="opportunityPicker" class="form-control resize-font"
+                                  placeholder="Please Enter Opportunity ID" ng-model="self.userInputOppId"
+                                  autocomplete="off" ng-change="self.oppIdChange()">
+                          </div>
+                          <span class="help-block align" ng-show="self.oppEmptyErr">Opportunity Id should not be
+                              empty.</span>
+                          <span class="help-block align" ng-show="self.oppPattErr">Opportunity Id should be like
+                              '1-AAAAAA'.</span>
+                      </form>
+                  </div>
+  
+                  <div class="tab-pane fade stat" id="customerNamePicker">
+                      <form name="customerForm"
+                          ng-class="{'has-error' : customerForm.customer.$error.searchKeyword || (customerForm.customer.$invalid) || self.cNameEmptyErr }">
+  
+                          <div id="customerWrap"
+                              class="form-group valid-feedback feedback-icon position-relative search-align">
+                              <label for="customerPicker" class="label-control floleft">Customer Name:</label>
+                              <input data-testId="customerDetailsSearch" type="text" maxlength="100" id="customer"
+                                  name="customer" class="form-control resize-font" autocomplete="off"
+                                  placeholder="Search using customer name or UID" ng-model-options="{debounce: 200}"
+                                  ng-model="self.customer"
+                                  uib-typeahead="customer as customer.name for customer in self.getCustomers($viewValue)"
+                                  typeahead-template-url="./app/components/quote/common/customer-dropdown.tpl.html"
+                                  ng-class="{'autocomplete-loading': self.customerLoading}" typeahead-min-length="999"
+                                  typeahead-loading="self.customerLoading"
+                                  typeahead-search='self.triggerCustomerTypeahead' ng-required='required'
+                                  ng-change="self.customerChange(customerForm)"
+                                  typeahead-on-select="self.onCustomerSelect(customerForm)">
+  
+                              <i class="fa fa-search searchIcon" ng-hide="self.customerLoading"
+                                  ng-click="self.triggerCustomerSearch(customerForm)"></i>
+                          </div>
+                          <div class="help-block align" ng-show="self.cNameEmptyErr">
+                              Please enter and select a valid customer name.
+                          </div>
+                          <div class="help-block align" ng-show="(customerForm.customer.$error.searchKeyword)">
+                              Only letters, numbers and special characters like "_",<br /> "&" are allowed to search
+                              customer.
+                          </div>
+                          <div class="help-block align" ng-show="(customerForm.customer.$error.lenErr)">
+                              Please Enter At least three Characters.
+                          </div>
+                      </form>
+                  </div>
+              </div>
+              <div class="row" style="margin-top: 5px; margin-bottom: 3px;">
+                  <div class="col-md-6">
+                      <input type="submit" value="Search" class="btn btn-success" ng-click="self.searchQuote()">
+                  </div>
+                  <div class="col-md-6">
+                      <input type="submit" value="Close" class="btn btn-primary" ng-click="self.closePopup()">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div> 
+
+  </ng-template>-->
+    <!-- <div class="mat-elevation-z8">
     <form [formGroup]="searchForm" class="search__form">
       <table mat-table [dataSource]="dataSource" matSort>
          
@@ -14,9 +871,9 @@
                       [resizeEdges]="{bottom: false, right: true, top: false, left: true}"> <button matTooltip="Click for extra info" matTooltipPosition="above" mat-icon-button
                       (click)="callAPI($event, 'quotetype')"><mat-icon color="primary"
                           class="icon">arrow_drop_down_circle</mat-icon></button>
-                         Quote Type  
-    
-              <ng-template #callAPIDialog1>
+                         Quote Type   -->
+
+    <!-- <ng-template #callAPIDialog3>
                   <div mat-dialog-content>
                       <div class="card-wrapper">
   
@@ -49,8 +906,8 @@
                   </div>
               </ng-template>
           </th>
-          <td mat-cell *matCellDef="let element"> {{element.contract.agreementType}} </td>
-      </ng-container>
+          <td mat-cell *matCellDef="let element"> {{element.contract.agreementType}} </td>-->
+    <!-- </ng-container>
   
   
       <ng-container matColumnDef="quoteid">
@@ -372,4 +1229,4 @@
   </form>
   <mat-paginator [pageSize]="5" [pageSizeOptions]="page_size_options"> </mat-paginator>
   </div>
-   
+    -->
