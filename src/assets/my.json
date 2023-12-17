@@ -1,0 +1,281 @@
+[
+  {
+      "quoteId": 64050,
+      "name": "mkhamgal - my",
+      "status": "null",
+      "cfu": "OB",
+      "totalUpfront": "0",
+      "totalMonthly": "0",
+      "createdBy": "p4003712",
+      "createdDate": "2023-10-16T15:53:25",
+      "updatedBy": "p4003712",
+      "updatedDate": "2023-10-16T15:53:25",
+      "createdByUser": "Mohammed Hundekar",
+      "updatedByUser": "Mohammed Hundekar",
+      "customer": {
+          "uid": "43884",
+          "name": "BRT Customer - Victoria"
+      },
+      "opportunity": {
+          "opportunityId": "1-7N0R11"
+      },
+      "contract": {
+          "agreementType": "NEW",
+          "agreementId": null,
+          "agreementStatus": "Quote Created"
+      },
+      "avgArpu": null,
+      "avgEarpu": null,
+      "productId": null,
+      "version": "1",
+      "approvalSummary": null
+  },
+  {
+    "quoteId": 64052,
+    "name": "mkhamgal - my",
+    "status": "null",
+    "cfu": "OB",
+    "totalUpfront": "0",
+    "totalMonthly": "0",
+    "createdBy": "p4003712",
+    "createdDate": "2023-10-16T15:53:25",
+    "updatedBy": "p4003712",
+    "updatedDate": "2023-10-16T15:53:25",
+    "createdByUser": "Mohammed Hundekar",
+    "updatedByUser": "Mohammed Hundekar",
+    "customer": {
+        "uid": "43884",
+        "name": "BRT Customer - Victoria"
+    },
+    "opportunity": {
+        "opportunityId": "1-7N0R11"
+    },
+    "contract": {
+        "agreementType": "NEW",
+        "agreementId": null,
+        "agreementStatus": "Quote Created"
+    },
+    "avgArpu": null,
+    "avgEarpu": null,
+    "productId": null,
+    "version": "1",
+    "approvalSummary": null
+},
+{
+  "quoteId": 64053,
+  "name": "pratishtha - my",
+  "status": "null",
+  "cfu": "OB",
+  "totalUpfront": "0",
+  "totalMonthly": "0",
+  "createdBy": "p4003712",
+  "createdDate": "2023-10-16T15:53:25",
+  "updatedBy": "p4003712",
+  "updatedDate": "2023-10-16T15:53:25",
+  "createdByUser": "Mohammed Hundekar",
+  "updatedByUser": "Mohammed Hundekar",
+  "customer": {
+      "uid": "43884",
+      "name": "BRT Customer - Victoria"
+  },
+  "opportunity": {
+      "opportunityId": "1-7N0R11"
+  },
+  "contract": {
+      "agreementType": "NEW",
+      "agreementId": null,
+      "agreementStatus": "Quote Created"
+  },
+  "avgArpu": null,
+  "avgEarpu": null,
+  "productId": null,
+  "version": "1",
+  "approvalSummary": null
+},
+  {
+      "quoteId": 64050,
+      "name": "mkhamgal - Untitled",
+      "status": "null",
+      "cfu": "OB",
+      "totalUpfront": "0",
+      "totalMonthly": "0",
+      "createdBy": "p4003712",
+      "createdDate": "2023-10-16T15:53:25",
+      "updatedBy": "p4003712",
+      "updatedDate": "2023-10-16T15:53:25",
+      "createdByUser": "Mohammed Hundekar",
+      "updatedByUser": "Mohammed Hundekar",
+      "customer": {
+          "uid": "43884",
+          "name": "BRT Customer - Victoria"
+      },
+      "opportunity": {
+          "opportunityId": "1-7N0R11"
+      },
+      "contract": {
+          "agreementType": "NEW",
+          "agreementId": null,
+          "agreementStatus": "Quote Created"
+      },
+      "avgArpu": null,
+      "avgEarpu": null,
+      "productId": null,
+      "version": "1",
+      "approvalSummary": null
+  },
+  {
+    "quoteId": 64054,
+    "name": "mkhamgal - Untitled",
+    "status": "null",
+    "cfu": "OB",
+    "totalUpfront": "0",
+    "totalMonthly": "0",
+    "createdBy": "p4003712",
+    "createdDate": "2023-10-16T15:53:25",
+    "updatedBy": "p4003712",
+    "updatedDate": "2023-10-16T15:53:25",
+    "createdByUser": "Mohammed Hundekar",
+    "updatedByUser": "Mohammed Hundekar",
+    "customer": {
+        "uid": "43884",
+        "name": "BRT Customer - Victoria"
+    },
+    "opportunity": {
+        "opportunityId": "1-7N0R11"
+    },
+    "contract": {
+        "agreementType": "NEW",
+        "agreementId": null,
+        "agreementStatus": "Quote Created"
+    },
+    "avgArpu": null,
+    "avgEarpu": null,
+    "productId": null,
+    "version": "1",
+    "approvalSummary": null
+},
+{
+  "quoteId": 64053,
+  "name": "pratishtha - Untitled",
+  "status": "null",
+  "cfu": "OB",
+  "totalUpfront": "0",
+  "totalMonthly": "0",
+  "createdBy": "p4003712",
+  "createdDate": "2023-10-16T15:53:25",
+  "updatedBy": "p4003712",
+  "updatedDate": "2023-10-16T15:53:25",
+  "createdByUser": "Mohammed Hundekar",
+  "updatedByUser": "Mohammed Hundekar",
+  "customer": {
+      "uid": "43884",
+      "name": "BRT Customer - Victoria"
+  },
+  "opportunity": {
+      "opportunityId": "1-7N0R11"
+  },
+  "contract": {
+      "agreementType": "NEW",
+      "agreementId": null,
+      "agreementStatus": "Quote Created"
+  },
+  "avgArpu": null,
+  "avgEarpu": null,
+  "productId": null,
+  "version": "1",
+  "approvalSummary": null
+},
+  {
+      "quoteId": 64057,
+      "name": "mkhamgal - Untitled",
+      "status": "null",
+      "cfu": "OB",
+      "totalUpfront": "0",
+      "totalMonthly": "0",
+      "createdBy": "p4003712",
+      "createdDate": "2023-10-16T15:53:25",
+      "updatedBy": "p4003712",
+      "updatedDate": "2023-10-16T15:53:25",
+      "createdByUser": "Mohammed Hundekar",
+      "updatedByUser": "Mohammed Hundekar",
+      "customer": {
+          "uid": "43884",
+          "name": "BRT Customer - Victoria"
+      },
+      "opportunity": {
+          "opportunityId": "1-7N0R11"
+      },
+      "contract": {
+          "agreementType": "NEW",
+          "agreementId": null,
+          "agreementStatus": "Quote Created"
+      },
+      "avgArpu": null,
+      "avgEarpu": null,
+      "productId": null,
+      "version": "1",
+      "approvalSummary": null
+  },
+  {
+    "quoteId": 64052,
+    "name": "mkhamgal - Untitled",
+    "status": "null",
+    "cfu": "OB",
+    "totalUpfront": "0",
+    "totalMonthly": "0",
+    "createdBy": "p4003712",
+    "createdDate": "2023-10-16T15:53:25",
+    "updatedBy": "p4003712",
+    "updatedDate": "2023-10-16T15:53:25",
+    "createdByUser": "Mohammed Hundekar",
+    "updatedByUser": "Mohammed Hundekar",
+    "customer": {
+        "uid": "43884",
+        "name": "BRT Customer - Victoria"
+    },
+    "opportunity": {
+        "opportunityId": "1-7N0R11"
+    },
+    "contract": {
+        "agreementType": "NEW",
+        "agreementId": null,
+        "agreementStatus": "Quote Created"
+    },
+    "avgArpu": null,
+    "avgEarpu": null,
+    "productId": null,
+    "version": "1",
+    "approvalSummary": null
+},
+{
+  "quoteId": 64059,
+  "name": "pratishtha - Untitled",
+  "status": "null",
+  "cfu": "OB",
+  "totalUpfront": "0",
+  "totalMonthly": "0",
+  "createdBy": "p4003712",
+  "createdDate": "2023-10-16T15:53:25",
+  "updatedBy": "p4003712",
+  "updatedDate": "2023-10-16T15:53:25",
+  "createdByUser": "Mohammed Hundekar",
+  "updatedByUser": "Mohammed Hundekar",
+  "customer": {
+      "uid": "43884",
+      "name": "BRT Customer - Victoria"
+  },
+  "opportunity": {
+      "opportunityId": "1-7N0R11"
+  },
+  "contract": {
+      "agreementType": "NEW",
+      "agreementId": null,
+      "agreementStatus": "Quote Created"
+  },
+  "avgArpu": null,
+  "avgEarpu": null,
+  "productId": null,
+  "version": "1",
+  "approvalSummary": null
+}
+]

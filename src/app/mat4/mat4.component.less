@@ -1,0 +1,35 @@
+:host {
+    background-color: white;
+
+    h1 {
+        display: inline;
+    }
+
+    div {
+        table {
+            .mat-mdc-header-row {
+                th {
+                    img {
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 50%;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+
+
+
+            tr:not(.selected):not(.mat-mdc-header-row):nth-child(odd) {
+                background-color: #e1ffff;
+            }
+
+
+
+            .selected {
+                background-color: #2aa3ad;
+            }
+        }
+    }
+}

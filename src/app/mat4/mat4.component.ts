@@ -11,7 +11,7 @@ import { QuoteListService } from './quote-list.service';
 @Component({
   selector: 'app-mat4',
   templateUrl: './mat4.component.html',
-  styleUrls: ['./mat4.component.css']
+  styleUrls: ['./mat4.component.less']
 })
 export class Mat4Component implements OnInit {
   public searchForm: FormGroup;
@@ -50,6 +50,15 @@ export class Mat4Component implements OnInit {
   public opportunity_idFilterOption = this.filterTypes['opportunity_id'][0];
   public statusFilterOption = this.filterTypes['status'][0];
   public dataLoaded = false;
+  public EmitResult = {
+    pageNumber: '',
+    pageSize: ''
+  };
+  public testPaginator = {
+    length: 1000,
+    pageSize: 10,
+    pageIndex: 1
+  };
 
   dataSource = new MatTableDataSource<any>([]);
   selection = new SelectionModel<any>(true, []);
@@ -234,6 +243,12 @@ export class Mat4Component implements OnInit {
     status = status === null ? '' : status;
 
     this.dataSource.filter = (quotetype + "$" + quoteid + '$' + name + "$" + cfu + "$" + custname + '$' + opportunity_id + "$" + status).trim().toLowerCase();
+  }
+  showTestEmit = ($event) => {
+    this.EmitResult =  {
+      pageNumber: $event.pageIndex,
+      pageSize: $event.pageSize
+    };
   }
   selectedRow;
 }

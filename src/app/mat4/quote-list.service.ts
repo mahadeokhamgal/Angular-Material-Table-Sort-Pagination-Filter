@@ -9,9 +9,9 @@ export class QuoteListService {
   constructor(private http: HttpClient) {
   }
    getAllQuotes() {
-    return this.http.get('http://localhost:8080/all.json');
+    return this.http.get('assets/all.json');
    }
    getMyQuotes() {
-    return this.http.get('http://localhost:8080/my.json');
+    return this.http.get('assets/my.json');
    }
 }

@@ -1,0 +1,59 @@
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #e1ffff;
+}
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
+    background-color: white;
+}
+.scrollable {
+    height: 450px;
+    overflow: scroll;
+}
+.icon {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 3px;
+}
+.sub-menu-wrap {
+    top: 100%;
+    right: 10%;
+    width: 320px;
+    max-height: 0px;
+    overflow: hidden;
+}
+.sub-menu-wrap.open-menu {
+    max-height: 400px;
+}
+.sub-menu {
+    background: #dbdddd;
+    padding-top: 10px;
+    padding-left: 5px;
+    margin: 10;
+    height: 150px;
+    width: 220px;
+}
+#condition {
+    background: white;
+    padding-top: 5px;
+    height: 30px;
+}
+input {
+    width: 200px;
+    height: 28px;
+}
+#filter {
+    background-color: rgb(48, 57, 235);
+    width: 98px;
+    height: 30px;
+}
+#clear {
+    background-color: white;
+    width: 98px;
+    height: 30px;
+}
+#items {
+    color: black;
+}
