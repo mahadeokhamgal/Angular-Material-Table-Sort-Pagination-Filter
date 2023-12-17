@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PaginatorDirective } from './paginator.directive';
 import { BubblePaginationDirective } from './bubble-pagintor.directive';
 
+
 @NgModule({
   declarations: [
     Mat4Component,

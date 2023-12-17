@@ -23,7 +23,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ResizableModule } from 'angular-resizable-element';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -58,7 +58,8 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule, 
     MatCommonModule, 
     MatDialogModule, 
-    FormsModule
+    FormsModule,
+    MatTabsModule
  
 ],
   exports: [
@@ -85,6 +86,7 @@ import { FormsModule } from '@angular/forms';
     MatCheckboxModule,
     ResizableModule,
     MatRippleModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule {}

@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -20,7 +21,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-
+    NgxPaginationModule ,
     MaterialModule,
     Mat4Module,
     RouterModule,
